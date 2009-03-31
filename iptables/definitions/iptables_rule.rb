@@ -23,6 +23,7 @@ define :iptables_rule, :enable => true, :source => nil, :variables => {} do
   template "/etc/iptables.d/#{params[:name]}" do
     source template_source
     mode 0644
+    backup 0
     variables params[:variables]
     notifies :run, resources(:execute => "rebuild-iptables")
     if params[:enable]
